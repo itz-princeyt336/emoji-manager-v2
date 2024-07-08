@@ -1,14 +1,10 @@
-const { Client, GatewayIntentBits, REST, Routes, MessageEmbed, Presence } = require('discord.js');
+const { Client, GatewayIntentBits, REST, Routes, MessageEmbed, Presence, ActivityType } = require('discord.js');
 const fs = require('fs');
 const reportBugCommand = require('./commands/reportbug.js');
 require('dotenv').config();
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-    ]
+    intents: [3243773]
 });
 
 client.commands = new Map();
@@ -44,9 +40,13 @@ client.once('ready', () => {
 
     // Set bot status (presence)
     client.user.setPresence({
-        activities: [{ name: '/help for commands', type: 'WATCHING' }],
-        status: 'online',
+        status: 'idle',
     });
+    client.user.setActivity({
+            name: '/help | Made By Friday',
+            type: ActivityType.Custom,
+         //   url: 'https://www.twitch.tv/discord'
+        });
 });
 
 client.on('interactionCreate', async interaction => {
